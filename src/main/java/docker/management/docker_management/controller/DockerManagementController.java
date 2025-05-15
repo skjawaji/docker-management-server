@@ -18,10 +18,5 @@ public class DockerManagementController {
         String result = dockerService.runContainer(request.getImage());
         return ResponseEntity.ok(result);
     }
-
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello");
-    }
 }
 
