@@ -18,5 +18,12 @@ public class DockerManagementController {
     public ResponseEntity<DockerCmdResp> runContainer(@RequestBody DockerCommandRequest request) {
         return ResponseEntity.ok(dockerService.runContainer(request.getImage()));
     }
+
+    @DeleteMapping("/stop/{containerId}")
+    public ResponseEntity<String> stopContainer(
+            @PathVariable String containerId
+    ) {
+        return ResponseEntity.ok(dockerService.stopContainer(containerId));
+    }
 }
 

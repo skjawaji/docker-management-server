@@ -71,4 +71,12 @@ public class DockerManagementService {
         }
     }
 
+    public String stopContainer(String containerId) {
+        dockerClient.stopContainerCmd(containerId)
+                .withTimeout(30)  // Timeout in seconds for graceful stop
+                .exec();
+        dockerClient.removeContainerCmd(containerId).withForce(true).exec();
+        return "Container Stopped successfully";
+    }
+
 }
