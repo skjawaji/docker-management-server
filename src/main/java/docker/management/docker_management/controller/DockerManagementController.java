@@ -15,7 +15,8 @@ public class DockerManagementController {
     private DockerManagementService dockerService;
 
     @PostMapping("/run")
-    public ResponseEntity<DockerCmdResp> runContainer(@RequestBody DockerCommandRequest request) {
+    public ResponseEntity<DockerCmdResp> runContainer(
+            @RequestBody DockerCommandRequest request) {
         return ResponseEntity.ok(dockerService.runContainer(request.getImage()));
     }
 

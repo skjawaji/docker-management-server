@@ -25,6 +25,8 @@ public class DockerManagementService {
     private int startPort;
     @Value("${port.range.end}")
     private int endPort;
+    @Value("${docker.baseUrl}")
+    private String baseUrl;
 
     @Autowired
     public DockerManagementService(DockerClient dockerClient, PortAllocator portAllocator) {
@@ -60,7 +62,7 @@ public class DockerManagementService {
 
             // Set response with container ID and URL for access
             resp.setContainerId(container.getId());
-            resp.setUrl("http://127.0.0.1:" + hostPort + "/?folder=/home/coder/projects");
+            resp.setUrl(baseUrl + ":" + hostPort + "/?folder=/home/coder/projects");
 
             return resp;
         } catch (DockerException e) {
