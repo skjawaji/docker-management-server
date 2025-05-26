@@ -14,6 +14,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(Customizer.withDefaults()) // Enable CORS
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/public", "/h2-console/**", "/auth/google/**").permitAll()
                         .anyRequest().authenticated()
@@ -22,8 +23,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/h2-console/**", "/auth/google/**")
                 )
                 .headers(headers -> headers
-                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin
-                        )
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults())

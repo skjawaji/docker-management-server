@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class DockerCommandRequest {
-    private String image;
+    private String imageName;
 }
