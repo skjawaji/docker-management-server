@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Service
 public class DockerManagementService {
@@ -52,7 +53,7 @@ public class DockerManagementService {
 
             // Create container with specified configurations
             CreateContainerResponse container = dockerClient.createContainerCmd(imageName)
-                    .withName(imageName + "-container-" + OffsetDateTime.now().toEpochSecond())
+                    .withName(imageName + "-container-" + UUID.randomUUID())
                     .withExposedPorts(ExposedPort.tcp(8080), ExposedPort.tcp(9323))
                     .withHostConfig(hostConfig)
                     .exec();
@@ -72,7 +73,7 @@ public class DockerManagementService {
             return resp;
         }
     }
-
+    
     public String stopContainer(String containerId) {
         dockerClient.stopContainerCmd(containerId)
                 .withTimeout(30)  // Timeout in seconds for graceful stop
